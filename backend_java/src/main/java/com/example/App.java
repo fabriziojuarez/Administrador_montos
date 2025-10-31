@@ -1,22 +1,24 @@
 package com.example;
 
-import com.example.controllers.RegistroController;
-import com.example.database.Conexion;
-import java.sql.Connection;
+import com.sun.net.httpserver.HttpServer;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
 
 public class App 
 {
     public static void main( String[] args )
     {
-        Connection conexion = Conexion.getConnection();
-        if (conexion != null) {
-            System.out.println("Hola, contectado a la base de datos correctamente!");
+        try {
+            HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+
+            // Registrar rutas
+            
+
+            server.start();
+            System.out.println("Servidor corriendo en http://localhost:8080");
+        } catch (IOException e) {
+            System.err.println("❌ Error al iniciar el servidor: " + e.getMessage());
         }
-
-        RegistroController controller = new RegistroController();
-
-        String registrosJson = controller.index();
-        System.out.println("Registros en formato JSON:");   
-        System.out.println(registrosJson);
     }
 }
