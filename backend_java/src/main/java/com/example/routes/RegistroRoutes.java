@@ -16,7 +16,55 @@ public class RegistroRoutes
 
         server.createContext("/registros", (HttpExchange exchange) -> {
             String method = exchange.getRequestMethod();
+            switch (method) {
+                case "GET":
+                    method = "GET registros";
+                    break;
+                case "POST":
+                    method = "POST registros";
+                    break;
+                default:
+                    method = "Método no soportado";
+                    break;
+            }   
             enviar(exchange, 200, method);
+        });
+
+        server.createContext("/registros/", (HttpExchange exchange) -> {
+            String method = exchange.getRequestMethod();
+            Integer status = 200;
+            String body = "";
+
+            String path = exchange.getRequestURI().getPath();
+            String[] partes = path.split("/");                 
+            Integer id = null;
+            
+            if (partes.length == 3) {
+                try {
+                    id = Integer.parseInt(partes[2]); 
+                    switch (method) {
+                        case "GET":
+                            body = "GET registro por ID" + id;
+                            break;
+                        case "PUT":
+                            body = "PUT actualizar registro por ID";
+                            break;
+                        case "DELETE":
+                            body = "DELETE eliminar registro por ID" + id;
+                            break;
+                        default:
+                            body = "Método no soportado";
+                            break;
+                    }  
+                } catch (NumberFormatException e) {
+                    status = 444; 
+                    body = e.getMessage();
+                }
+            }else{
+                status = 444; 
+                body = "Falta el ID en la URL";
+            }
+            enviar(exchange, status, body);
         });
     }
 
