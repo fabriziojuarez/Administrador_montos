@@ -48,7 +48,7 @@ public class RegistroRoutes
                     id = Integer.parseInt(partes[2]); 
                     switch (method) {
                         case "GET":
-                            body = "GET registro por ID" + id;
+                            body = registroController.show(id);
                             break;
                         case "PUT":
                             body = "PUT actualizar registro por ID";
