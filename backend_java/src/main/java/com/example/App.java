@@ -18,7 +18,7 @@ public class App
             server.start();
             System.out.println("Servidor corriendo en http://localhost:8080");
         } catch (IOException e) {
-            System.err.println("❌ Error al iniciar el servidor: " + e.getMessage());
+            System.err.println("Error al iniciar el servidor: " + e.getMessage());
         }
     }
 }
