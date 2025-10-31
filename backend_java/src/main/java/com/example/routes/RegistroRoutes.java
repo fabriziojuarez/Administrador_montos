@@ -6,28 +6,32 @@ import com.sun.net.httpserver.HttpExchange;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
-// import com.example.controllers.RegistroController;
+import com.example.controllers.RegistroController;
 
 public class RegistroRoutes
 {
 
     public static void Routes(HttpServer server) {
-        // RegistroController registroController = new RegistroController();
+        RegistroController registroController = new RegistroController();
 
         server.createContext("/registros", (HttpExchange exchange) -> {
             String method = exchange.getRequestMethod();
+            Integer status = 200;
+            String body = "";
+
             switch (method) {
                 case "GET":
-                    method = "GET registros";
+                    body = registroController.index();
                     break;
                 case "POST":
-                    method = "POST registros";
+                    body = "POST registros";
                     break;
                 default:
-                    method = "Método no soportado";
+                    status = 400;
+                    body = "Método no soportado";
                     break;
             }   
-            enviar(exchange, 200, method);
+            enviar(exchange, status, body);
         });
 
         server.createContext("/registros/", (HttpExchange exchange) -> {
@@ -61,7 +65,7 @@ public class RegistroRoutes
                     body = e.getMessage();
                 }
             }else{
-                status = 444; 
+                status = 400; 
                 body = "Falta el ID en la URL";
             }
             enviar(exchange, status, body);
