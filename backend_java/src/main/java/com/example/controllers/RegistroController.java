@@ -14,7 +14,7 @@ public class RegistroController
 {
     private static final Gson gson = new Gson();
 
-    public static String index() {
+    public String index() {
         List<Registro> registros = new ArrayList<>();
         String sql = "SELECT * FROM registros";
         try(
