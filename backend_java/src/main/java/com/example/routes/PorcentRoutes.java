@@ -14,7 +14,7 @@ public class PorcentRoutes{
     public static void Routes(HttpServer server) {
         PorcentController porcentController = new PorcentController();
 
-        server.createContext("/porcentaje", (HttpExchange exchange)->{
+        server.createContext("/porcentajes", (HttpExchange exchange)->{
             String method = exchange.getRequestMethod();
             if(!method.equals("GET")){
                 enviar(exchange, 400, "Método no soportado");
