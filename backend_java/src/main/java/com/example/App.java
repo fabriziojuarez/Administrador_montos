@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.routes.PorcentRoutes;
 import com.example.routes.RegistroRoutes;
 import com.sun.net.httpserver.HttpServer;
 
@@ -15,6 +16,7 @@ public class App
 
             // Registrar rutas
             RegistroRoutes.Routes(server);
+            PorcentRoutes.Routes(server);
 
             server.start();
             System.out.println("Servidor corriendo en http://localhost:8000");

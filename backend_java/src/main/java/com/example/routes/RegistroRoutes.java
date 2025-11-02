@@ -15,8 +15,6 @@ public class RegistroRoutes
 {
     public static void Routes(HttpServer server) {
         RegistroController registroController = new RegistroController();
-        //Gson gson = new Gson();
-
 
         server.createContext("/registros", (HttpExchange exchange) -> {
             String method = exchange.getRequestMethod();
@@ -108,7 +106,10 @@ public class RegistroRoutes
 
     public static void enviar(HttpExchange exchange, int status, String res_body) {
         try{
-            exchange.getResponseHeaders().set("Content-Type", "application/json; charset=UTF-8");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            exchange.getResponseHeaders().add("Content-Type", "application/json; charset=UTF-8");
             byte[] bytes = res_body.getBytes(StandardCharsets.UTF_8);
             exchange.sendResponseHeaders(status, bytes.length);
             try (OutputStream os = exchange.getResponseBody()) {
