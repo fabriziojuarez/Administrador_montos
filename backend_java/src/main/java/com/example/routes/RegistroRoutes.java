@@ -86,7 +86,7 @@ public class RegistroRoutes
                             body = "PUT actualizar registro por ID";
                             break;
                         case "DELETE":
-                            body = "DELETE eliminar registro por ID" + id;
+                            body = registroController.destroy(id);
                             break;
                         default:
                             body = "Método no soportado";

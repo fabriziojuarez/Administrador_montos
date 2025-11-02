@@ -57,12 +57,20 @@ public class RegistroController
     }
 
     public String destroy(Integer id){
-        try{
-
+        String sql = "DELETE FROM registros WHERE id_registro = ?";
+        try(
+            Connection conn = Conexion.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+        ){
+            stmt.setInt(1, id);
+            int filas = stmt.executeUpdate();
+            if(filas == 0){
+                return "Error al eliminar registro";
+            }
         }catch(Exception e){
-
+            System.out.println("Error al eliminar registro: " + e.getMessage());
         }
-        return "";
+        return "Registro eliminado";
     }
 
 }
