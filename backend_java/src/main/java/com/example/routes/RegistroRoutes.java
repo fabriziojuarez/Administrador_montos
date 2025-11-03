@@ -50,7 +50,7 @@ public class RegistroRoutes
                         } else if (part.contains("name=\"moneda_registro\"")) {
                             moneda = part.split("\n")[2].trim();
                         }
-                    }
+                    }// Corregirlo mas adelante
 
                     if (montoStr == null || moneda == null) {
                         System.out.println("Error: no se pudieron obtener los campos");
@@ -80,7 +80,7 @@ public class RegistroRoutes
                     id = Integer.parseInt(partes[2]); 
                     switch (method) {
                         case "GET":
-                            // body = registroController.show(id);
+                             body = registroController.show(id);
                             break;
                         case "PUT":
                             body = "PUT actualizar registro por ID";

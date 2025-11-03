@@ -38,6 +38,29 @@ public class RegistroController
         return gson.toJson(registros);
     }
 
+    public String show(Integer id){
+        Registro registro = new Registro();
+        String sql = "SELECT * FROM registros WHERE id_registro = ?";
+        try(
+            Connection conn = Conexion.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+        ){
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if(!rs.next()){
+                return "Registro no encontrado";
+            }
+            registro.setId_registro(rs.getInt("id_registro"));
+            registro.setMonto_registro(rs.getBigDecimal("monto_registro"));
+            registro.setMoneda_registro(rs.getString("moneda_registro"));
+            registro.setCreated_at(rs.getTimestamp("created_at"));
+            registro.setUpdated_at(rs.getTimestamp("updated_at"));
+        }catch(SQLException e){
+            System.err.println("Error al obtener registro: " + e.getMessage());
+        }
+          return gson.toJson(registro);
+    }
+
     public String store(BigDecimal monto, String moneda){
         String sql = "INSERT INTO registros (monto_registro, moneda_registro) VALUES (?, ?)";
         try(

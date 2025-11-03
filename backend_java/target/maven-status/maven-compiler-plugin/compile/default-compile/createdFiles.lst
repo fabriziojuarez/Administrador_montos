@@ -1,5 +1,3 @@
 com\example\models\Registro.class
-com\example\controllers\RegistroController.class
 com\example\database\Conexion.class
 com\example\App.class
-com\example\routes\RegistroRoutes.class
