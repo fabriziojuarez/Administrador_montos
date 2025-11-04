@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.routes.FastFortexRoutes;
+import com.example.routes.PartnerRoutes;
 import com.example.routes.PorcentRoutes;
 import com.example.routes.RegistroRoutes;
 import com.sun.net.httpserver.HttpServer;
@@ -17,8 +18,10 @@ public class App
 
             // Registrar rutas
             RegistroRoutes.Routes(server);
+            PartnerRoutes.Routes(server);
             PorcentRoutes.Routes(server);
             FastFortexRoutes.Routes(server);
+            
             server.start();
             System.out.println("Servidor corriendo en http://localhost:8000");
         } catch (IOException e) {
