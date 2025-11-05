@@ -36,8 +36,6 @@ public class FastFortexRoutes {
 
                     String rawBody = body.toString();
 
-                    System.out.println("JSON recibido: " + rawBody);
-
                     Gson gson = new Gson();
                     JsonObject json = gson.fromJson(rawBody, JsonObject.class);
 
@@ -53,13 +51,12 @@ public class FastFortexRoutes {
                     exchange.sendResponseHeaders(204, -1);
                     break;
                 }
-                    default:{
-                        status = 405;
-                        res_body = "Método no soportado";
-                        break;
-                    }
+                default:{
+                    status = 405;
+                    res_body = "Método no soportado";
+                    break;
                 }
-
+            }
             enviar(exchange, status, res_body);
         });
     }
